@@ -7,7 +7,7 @@
 #include <ctime>
 #include <cmath>
 #include <stack>
-#include <vector> 
+#include <vector>
 #include <stdio.h>
 #include <random>
 #include <cstdlib>
@@ -38,6 +38,14 @@ public:
     }
     void input_name() {
         cin >> Name;
+    }
+    void print() {
+        cout << Name << endl;
+        cout << count_of_street << endl;
+        cout << position << endl;
+        cout << wallet << endl;
+        cout << number_of_player << endl;
+
     }
 };
 
@@ -74,29 +82,6 @@ public:
     }
 };
 
-
-/*class cube {
-public:
-    int min;
-    int max;
-    int result;
-    cube() {
-        min = 1;
-        max = 12;
-        result = 0;
-    }
-
-    void cub() {
-        int min = 1;
-        int max = 12;
-        random_device rd;
-        mt19937 gen(rd());
-        uniform_int_distribution<> distrib(min, max);
-        result = distrib(gen);
-        cout << "Выпало число : " << result;
-    }
-};*/
-
 class game {
 public:
     int move = 0;
@@ -109,36 +94,173 @@ public:
     }
     bool state() {
         if (countPlayers == 2) {
-            cout << "Игрок 1:" << player_1.position << endl;;
-            //характеристики
+            cout << "Игрок 1:" << player_1.position << endl;
+            player_1.print();
             cout << "Игрок 2:" << player_2.position << endl;;
-            //характеристики
-            map(); // полностью сделать 
+            player_2.print();
+            map();
+            system("pause");
+            round(1);
+            round(2);
+        }
+        else if (countPlayers == 3) {
+            cout << "Игрок 1:" << player_1.position << endl;
+            player_1.print();
+            cout << "Игрок 2:" << player_2.position << endl;;
+            player_2.print();
+            cout << "Игрок 3:" << player_3.position << endl;;
+            player_3.print();
+            map();
+            system("pause");
+            round(1);
+            round(2);
+        }
+        else if (countPlayers == 4) {
+            cout << "Игрок 1:" << player_1.position << endl;
+            player_1.print();
+            cout << "Игрок 2:" << player_2.position << endl;;
+            player_2.print();
+            cout << "Игрок 3:" << player_3.position << endl;;
+            player_3.print();
+            cout << "Игрок 4:" << player_4.position << endl;;
+            player_4.print();
+            map();
+            system("pause");
+            round(1);
+            round(2);
+        }
+        else if (countPlayers == 5) {
+            cout << "Игрок 1:" << player_1.position << endl;
+            player_1.print();
+            cout << "Игрок 2:" << player_2.position << endl;;
+            player_2.print();
+            cout << "Игрок 3:" << player_3.position << endl;;
+            player_3.print();
+            cout << "Игрок 4:" << player_4.position << endl;;
+            player_4.print();
+            cout << "Игрок 5:" << player_5.position << endl;;
+            player_5.print();
+            map();
+            system("pause");
+            round(1);
+            round(2);
+        }
+        else if (countPlayers == 6) {
+            cout << "Игрок 1:" << player_1.position << endl;
+            player_1.print();
+            cout << "Игрок 2:" << player_2.position << endl;;
+            player_2.print();
+            cout << "Игрок 3:" << player_3.position << endl;;
+            player_3.print();
+            cout << "Игрок 4:" << player_4.position << endl;;
+            player_4.print();
+            cout << "Игрок 5:" << player_5.position << endl;;
+            player_5.print();
+            cout << "Игрок 6:" << player_6.position << endl;;
+            player_6.print();
+            map();
             system("pause");
             round(1);
             round(2);
         }
         return state();
+    }
+    void buy(person none, vector<street>karta) {
+        if (none.wallet > karta.at(none.position).cost) {
+            none.wallet -= karta.at(none.position).cost;
+            cout << "Игрок №" << none.number_of_player << " купил улицу: " << karta.at(none.position).street_name;
+            karta.at(none.position).isOwner = true;
+        }
+        else {
+            cout << "У игрока не хватает денег";
+        }
 
     }
     void position(int number, int rand) {
         if (number == 1) {
             if (player_1.position + rand > 24) {
-                //если чел стоит на 24улице и ему выпадает 4 то он переходит на 4 улицу а не на 1 
+                player_1.position = player_1.position - 24;
+                if (karta.at(player_1.position).isOwner == 0) {
+                    buy(player_1, karta);
+                }
+                else {
+                    player_1.wallet -= 30;
+                }
             }
             else {
                 player_1.position = player_1.position + rand;
             }
         }
         else if (number == 2) {
-            player_2.position = player_2.position + rand;
+            if (player_2.position + rand > 24) {
+                player_2.position = player_2.position - 24;
+                if (karta.at(player_2.position).isOwner == 0) {
+                    buy(player_2, karta);
+                }
+                else {
+                    player_2.wallet -= 30;
+                }
+            }
+            else {
+                player_2.position = player_2.position + rand;
+            }
         }
-        if (karta.at(player_2.position).isOwner == 0) {
-            buy();
+        else if (number == 3) {
+            if (player_3.position + rand > 24) {
+                player_3.position = player_3.position - 24;
+                if (karta.at(player_3.position).isOwner == 0) {
+                    buy(player_3, karta);
+                }
+                else {
+                    player_3.wallet -= 30;
+                }
+            }
+            else {
+                player_3.position = player_3.position + rand;
+            }
         }
-
-    }
-    void buy() {
+        else if (number == 4) {
+            if (player_4.position + rand > 24) {
+                player_4.position = player_4.position - 24;
+                if (karta.at(player_4.position).isOwner == 0) {
+                    buy(player_4, karta);
+                }
+                else {
+                    player_4.wallet -= 30;
+                }
+            }
+            else {
+                player_4.position = player_4.position + rand;
+            }
+        }
+        else if (number == 5) {
+            if (player_5.position + rand > 24) {
+                player_5.position = player_5.position - 24;
+                if (karta.at(player_5.position).isOwner == 0) {
+                    buy(player_5, karta);
+                }
+                else {
+                    player_5.wallet -= 30;
+                }
+            }
+            else {
+                player_5.position = player_5.position + rand;
+            }
+        }
+        else if (number == 6) {
+            if (player_6.position + rand > 24) {
+                player_6.position = player_6.position - 24;
+                if (karta.at(player_6.position).isOwner == 0) {
+                    buy(player_6, karta);
+                }
+                else {
+                    player_6.wallet -= 30;
+                }
+            }
+            else {
+                player_6.position = player_6.position + rand;
+            }
+        }
     }
     int menu() {
         int buff;
@@ -158,16 +280,19 @@ public:
         return buff;
     }
     void map() {
-        for (int i = 0; i < 3; i++) {
-            cout << "Название:" << karta.at(i).street_name << endl;
+        for (int i = 0; i < 23; i++) {
+            cout << "-----------------------------------------------------------------" << endl;
+            cout << "Количество строений:" << karta.at(i).number_of_buildings << endl;
+            cout << "Cтоимость:" << karta.at(i).cost << endl;
+            cout << "Штраф:" << karta.at(i).rent << endl;
+            cout << "Cтоимость улицы:" << karta.at(i).street_color << endl;
+            cout << "Цвет района:" << karta.at(i).area_color << endl;
+            cout << "Название Улицы:" << karta.at(i).street_name << endl;
+            cout << "Номер улицы:" << karta.at(i).number_street << endl;
+
         }
-
     }
-
 };
-
-
-
 int main() {
     srand(time(NULL));
     game Game;
@@ -220,7 +345,6 @@ int main() {
         Game.karta.push_back(myStreetTwentyThree);
         street myStreetTwentyFour(0, 450, 120, "Dark blue", "Dark blue", "ул.Космонафтики", 23);
         Game.karta.push_back(myStreetTwentyFour);
-
     }
     system("chcp 1251>nul");
     setlocale(LC_ALL, "ru");
@@ -241,7 +365,7 @@ int main() {
             Game.countPlayers = count_of_players;
             Game.state();
         }
-        /*else if (count_of_players == 3) {
+        else if (count_of_players == 3) {
             cin.ignore();
             cout << "Введите имя для игрока №1: " << endl;
             getline(cin, name);
@@ -306,16 +430,10 @@ int main() {
             cout << "Введите имя для игрока №6: " << endl;
             getline(cin, name);
             person player_6(name);
-        }*/
+        }
 
     }
     else {
         cout << "Возвращайтесь снова!" << endl;
     }
-
-
-
 };
-
-// comit test 3
-
