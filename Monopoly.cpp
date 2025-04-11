@@ -98,7 +98,7 @@ public:
                 cout << players[number - 1].Name << " не платит штраф, так как это его улица." << endl;
             }
         }
-        Sleep(3000);
+        Sleep(2000);
         if (players[number - 1].wallet < 0) {
             cout << players[number - 1].Name << " обанкротился!" << endl;
             players.erase(players.begin() + (number - 1));
@@ -165,19 +165,19 @@ public:
                 cin.ignore();
                 cin.get();
                 cout << "Продолжаем...";
-                Sleep(2000);
+                Sleep(1000);
             }
             else {
                 cout << "У игрока нет улиц" << endl;
             }
-            Sleep(5000);
+            Sleep(2000);
         }
         else if (choice == 2) {
             cout << "Нажмите Enter для продолжения" << endl;
             cin.ignore();
             cin.get();
             cout << "Продолжаем...";
-            Sleep(2000);
+            Sleep(1000);
         }
         else if (choice == 3) {
             cout << "Выход из игры..." << endl;
